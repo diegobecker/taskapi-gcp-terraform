@@ -1,0 +1,37 @@
+# --------------------
+# General
+# --------------------
+.DS_Store
+.env
+.env.*
+*.log
+
+# --------------------
+# .NET
+# --------------------
+bin/
+obj/
+*.user
+*.suo
+*.rsuser
+*.csproj.user
+
+# --------------------
+# Docker
+# --------------------
+**/docker-compose.override.yml
+
+# --------------------
+# Terraform
+# --------------------
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+crash.log
+
+# --------------------
+# IDEs
+# --------------------
+.vscode/
+.idea/
