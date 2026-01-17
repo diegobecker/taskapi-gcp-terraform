@@ -25,6 +25,6 @@ app.MapHealthChecks("/health");
 app.MapControllers();
 
 // Cloud Run padrão
-app.Urls.Add("http://0.0.0.0:8080");
+// app.Urls.Add("http://0.0.0.0:8080");
 
 app.Run();
