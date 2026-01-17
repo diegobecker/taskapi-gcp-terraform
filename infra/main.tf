@@ -3,6 +3,13 @@ resource "google_artifact_registry_repository" "docker_repo" {
   repository_id = var.artifact_repo
   description   = "Docker images for TaskApi"
   format        = "DOCKER"
+
+  labels = {
+    app   = var.service_name
+    env   = "lab"
+    owner = "diego"
+    cost  = "taskapi"
+  }
 }
 
 resource "google_service_account" "cloud_run_sa" {
@@ -17,6 +24,11 @@ resource "google_cloud_run_v2_service" "api" {
   template {
     service_account = google_service_account.cloud_run_sa.email
 
+    scaling {
+      min_instance_count = 0
+      max_instance_count = 1
+    }
+
     containers {
       # image = "us-docker.pkg.dev/cloudrun/container/hello"
       image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_repo}/${var.service_name}:v2"
@@ -25,6 +37,13 @@ resource "google_cloud_run_v2_service" "api" {
         container_port = 8080
       }
     }
+  }
+
+  labels = {
+    app   = var.service_name
+    env   = "lab"
+    owner = "diego"
+    cost  = "taskapi"
   }
 }
 
